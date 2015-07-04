@@ -13,6 +13,7 @@ but it will not start a new vim instance inside of vim.
 Verminal can be installed using Pathogen, and of course can also be installed
 manually. For manual installation, move verminal.vim to your ~/.vim/plugin 
 directory.  
+
 #How do I use Verminal?
 At this time, to use verminal, you can either type :call NewBuffer(), which 
 will open a new buffer with a verminal initialized in it. If you have a buffer 
@@ -24,11 +25,14 @@ use. For example, to map NewBuffer() to <Leader>om, add this line to your
 * nnoremap <Leader>om :call NewBuffer()<Enter>
   
 #What are the limitations of verminal?
-Verminal will not work if the command is interactive (if it prompts you for 
-input, it won't work with vermianal). This is due to limitations to vim, and 
-in an effort to make this plugin as portable as possible, I do not plan to add
-support for interactive plugins unless vim adds this feature. Given Bram 
-Mooleanar's positon on shells in vim, I do not believe this will ever happen.
+Verminal will not work with interactive commands. The distinction between 
+interactive and noninteractive commands is a bit blurred -- simple prompts
+for input should work (such as git's prompts for username/password). However,
+ssh will not work. This is due to limitations to vim, and 
+in an effort to make this plugin as portable as possible, support for
+interactive commands is will not be added unless vim adds this feature.
+Given Bram Mooleanar's positon on shells in vim, this is unlikely. 
+
 #Captured Commands
 * pwd
 * cd
