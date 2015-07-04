@@ -24,8 +24,9 @@ in an effort to make this plugin as portable as possible, I do not plan to add
 support for interactive plugins unless vim adds this feature. Given Bram 
 Mooleanar's positon on shells in vim, I do not believe this will ever happen.
 #Captured Commands
-pwd
-cd
+* pwd
+* cd
+* vim
 #To-Do List
 * Add support for any ex command (vim shell). 
 * Add support for a vim-mode, so vim shell doesn't need colon in front of 
