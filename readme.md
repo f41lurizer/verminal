@@ -27,6 +27,7 @@ Mooleanar's positon on shells in vim, I do not believe this will ever happen.
 * pwd
 * cd
 * vim
+
 #To-Do List
 * Add support for any ex command (vim shell). 
 * Add support for a vim-mode, so vim shell doesn't need colon in front of 
