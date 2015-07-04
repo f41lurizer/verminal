@@ -7,6 +7,7 @@ function InitMappings()
   highlight clear SignColumn
   "remove line numbers in local buffer
   setl nonumber
+  setl norelativenumber
   call ShowPrompt()
 endfunction
 
@@ -24,6 +25,8 @@ endfunction
 
 "function to evaluate user commands
 function RunCommand()
+  "sometimes we need to switch buffers (if for ex opening a file)
+  let switchBuffers = 0
   "yank command into register z
   normal! ^v$"zy
   let cmd = @z
@@ -48,15 +51,32 @@ function RunCommand()
       normal! o
       stopinsert
       normal! $"zp
-    "if command isn't special cased, just run it 
+    " vim is used, open file at that path
+    elseif cmdsp[0] == "vim"
+      "TODO: loop to join the rest to account for paths with spaces
+      let switchBuffers = 1
+      let vimCmd = "edit " . cmdsp[1]
+      execute vimCmd
+   " "if command isn't special cased, just run it 
     else
       let excmd = 'r! '.cmd
       execute excmd
     endif
+  "if we have opened a new buffer, switch back to complete commands
+  if switchBuffers
+    b#
+  endif
+  "prepare prompt for next file
   let b:commandNum += 1
   normal! o
   call ShowPrompt()
-  startinsert
+  "switch back to previous buffer if we need to
+  if switchBuffers
+    b#
+    stopinsert
+  else
+    startinsert
+  endif
 endfunction
 
 "function to use signcolumn to display a prompt for user on command lines
