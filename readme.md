@@ -11,12 +11,18 @@ No. You can use vim as a command to open files in your current vim instance,
 but it will not start a new vim instance inside of vim. 
 #Installation
 Verminal can be installed using Pathogen, and of course can also be installed
-manually. 
+manually. For manual installation, move verminal.vim to your ~/.vim/plugin 
+directory.  
 #How do I use Verminal?
 At this time, to use verminal, you can either type :call NewBuffer(), which 
 will open a new buffer with a verminal initialized in it. If you have a buffer 
 you wish to convert to a verminal, you can do this by typing
-:call InitMappings().  
+:call InitMappings(). It is recommended that you map whichever one of these 
+functions that you usually use to some keystroke so it's more convenient to
+use. For example, to map NewBuffer() to <Leader>om, add this line to your 
+.vimrc: 
+* nnoremap <Leader>om :call NewBuffer()<Enter>
+  
 #What are the limitations of verminal?
 Verminal will not work if the command is interactive (if it prompts you for 
 input, it won't work with vermianal). This is due to limitations to vim, and 
