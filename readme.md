@@ -5,7 +5,8 @@ commands. Whatever commands are available in the shell that starts vim should
 be available in verminal. Please note that interactive commands are not
 supported. Verminal also remaps some commands which vim has internal support 
 for. For a list of these captured commands, please see the Captured Commands
-section. 
+section. Verminal also allows you to run ex mode commands by typing :Command
+from a verminal buffer.  
 ##Does this let me run vim inside vim inside vim inside vim???
 No. You can use vim as a command to open files in your current vim instance,
 but it will not start a new vim instance inside of vim. 
@@ -15,23 +16,26 @@ manually. For manual installation, move verminal.vim to your ~/.vim/plugin
 directory.  
 
 #How do I use Verminal?
-At this time, to use verminal, you can either type :call NewBuffer(), which 
-will open a new buffer with a verminal initialized in it. If you have a buffer 
-you wish to convert to a verminal, you can do this by typing
-:call InitMappings(). It is recommended that you map whichever one of these 
-functions that you usually use to some keystroke so it's more convenient to
-use. For example, to map NewBuffer() to <Leader>om, add this line to your 
-.vimrc: 
-* nnoremap <Leader>om :call NewBuffer()<Enter>
+Verminal supports two "modes". The first, external mode, can be used by simply
+typing a command in the verminal window (ex: ls -lah). The second, Ex mode, 
+is used by typing a :command in a verminal window (ex: :source file.vim). 
 
-  
+To use verminal, you can type 
+:call NewBuffer()
+which will open a new buffer with a verminal initialized in it. 
+
+If you have a buffer you wish to convert to a verminal, you can type 
+:call InitMappings()
+It is recommended that you map one of these functions to a keybinding for ease of
+use. For example, to map NewBuffer() to <Leader>om, add this line to your .vimrc: 
+* nnoremap <Leader>om :call NewBuffer()<Enter>
+ 
 #What are the limitations of verminal?
 ##Interactive Commands
-Verminal will not work with interactive commands. The distinction between 
-interactive and noninteractive commands is a bit blurred -- simple prompts
-for input should work (such as git's prompts for username/password). However,
-ssh will not work. This is due to limitations to vim, and 
-in an effort to make this plugin as portable as possible, support for
+Verminal will not work with interactive commands. Commands which prompt for
+standard input are not considered interactive and will work. However, things like 
+the emacs operating system will not be able to run. This is due to limitations of
+ vim, and in an effort to make this plugin as portable as possible, support for
 interactive commands is will not be added unless vim adds this feature.
 Given Bram Mooleanar's positon on shells in vim, this is unlikely. 
 ##Register Usage
@@ -41,9 +45,9 @@ for use. Ultimately, it would be nice not to use registers at all, but this is
 not an urgent optimization. 
 
 #Captured Commands
-* pwd
-* cd
-* vim
+* pwd       -- use internal vim implementation
+* cd        -- use internal vim implementation
+* vim       -- open file in new hidden buffer
 
 #To-Do List
 * See about using append() instead of register hacks to insert text
