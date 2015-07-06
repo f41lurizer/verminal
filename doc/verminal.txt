@@ -95,4 +95,4 @@ Version 1.0.0 -- External and Ex mode commands work properly, help docs started
 
 ====================================================================
 Section 9: Credits                   *VerminalCredits*
-Mazin Jindeel (f41lurizer)
+f41lurizer
