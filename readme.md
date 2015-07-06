@@ -4,9 +4,9 @@ system, because it simply relies on vim's existing ability to run external
 commands. Whatever commands are available in the shell that starts vim should
 be available in verminal. Please note that interactive commands are not
 supported. Verminal also remaps some commands which vim has internal support 
-for. For a list of these captured commands, please see the Captured Commands
-section. Verminal also allows you to run ex mode commands by typing :Command
-from a verminal buffer.  
+for. For a list of these captured commands, read the helpdoc for the plugin.
+Verminal also allows you to run ex mode commands by typing :Command from a 
+verminal buffer.  
 ##Does this let me run vim inside vim inside vim inside vim???
 No. You can use vim as a command to open files in your current vim instance,
 but it will not start a new vim instance inside of vim. 
@@ -43,11 +43,6 @@ Pleaes note that verminal will use your z register for internal storage.
 Future support is planned to allow the user to select a register other than z
 for use. Ultimately, it would be nice not to use registers at all, but this is 
 not an urgent optimization. 
-
-#Captured Commands
-* pwd       -- use internal vim implementation
-* cd        -- use internal vim implementation
-* vim       -- open file in new hidden buffer
 
 #To-Do List
 * See about using append() instead of register hacks to insert text

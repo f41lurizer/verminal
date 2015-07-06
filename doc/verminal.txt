@@ -57,7 +57,7 @@ description of what they are redirected to do.
 * pwd       -- use internal vim implementation
 * cd        -- use internal vim implementation
 * vim       -- open file in new hidden buffer
-
+* emacs     -- four letter words are not allowed
 ====================================================================
 Section 4: Mappings                                  *VerminalMappings*
 Verminal will remap the Enter key from insert mode to a function, so users 

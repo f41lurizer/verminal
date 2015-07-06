@@ -46,6 +46,12 @@ function RunCommand()
     elseif cmdsp[0] =="pwd"
       call RunExCommand(cmd)
 
+    "don't let people use 4 letter word commands
+    elseif cmdsp[0] =="emacs"
+      let g:pun =  OutputEmacsMessage()
+      call OutputMessage(g:pun)
+
+    "open file in new buffer
     elseif cmdsp[0] == "vim"
       let path = RemoveCommand(cmd, len(cmdsp[0]) + 1)
       call OpenFile(path)
@@ -111,4 +117,54 @@ function ShowPrompt()
   let cmd = signCmd . " " . nameCmd . " " . lineCmd . " " . bufferCmd
   execute cmd
   startinsert
+endfunction
+
+function OutputEmacsMessage()
+  let time = reltime()[0]
+  let punNum = time % 30 "30 puns
+  let puns =  [
+    \ 'Eight Megabytes And Constantly Swapping',
+    \ 'Emacs Manuals Are Cryptic and Surreal',
+    \ 'Each Manuals Audience is Completely Stupified',
+    \ 'Emacs Means A Crappy Screen',
+    \ 'Eventually Munches All Computer Storage',
+    \ 'Even My Aunt Crashes the System',
+    \ 'Eradication of Memory Accomplished with Complete Simplicity',
+    \ 'Elsewhere Maybe Alternative Civilizations Survive',
+    \ 'Esoteric Malleability Always Considered Silly',
+    \ 'Emacs Manuals Always Cause Senility',
+    \ 'Easily Maintained with the Assistance of Chemical Solutions',
+    \ 'Edwardian Manifestation of All Colonial Sins',
+    \ 'Generally Not Used Except by Middle Aged Computer Scientists',
+    \ 'Elsewhere Maybe All Commands are Simple',
+    \ 'Emacs May Allow Customized Screwups',
+    \ 'Excellent Manuals Are Clearly Suppressed',
+    \ 'Emetic Macros Assault Core and Segmentation',
+    \ 'Embarrassed Manual-Writer Accused of Communist Subversion',
+    \ 'Easily Mangles, Aborts, Crashes and Stupifies',
+    \ 'Extraneous Macros And Commands Stink',
+    \ 'Exceptionally Mediocre Algorithm for Computer Scientists',
+    \ 'Equine Mammals Are Considerably Smaller',
+    \ 'Exceptionally Mediocre Autocratic Control System',
+    \ 'EMACS May Alienate Clients and Supporters',
+    \ 'Excavating Mayan Architecture Comes Simpler',
+    \ 'Erasing Minds Allows Complete Submission',
+    \ 'Emacs Makers Are Crazy Sickos',
+    \ 'Eradication of Memory Accomplished with Complete Simplicity',
+    \ 'Emetic Macros Assault Core and Segmentation',
+    \ 'Epileptic MLisp Aggravates Compiler Seizures',
+    \ "No 4 letter words! You'll scare the verminal!"]
+    let punHeader = "Command not found. Did you mean: \n"
+    if punNum == 30
+      let punHeader = ""
+    endif
+    return punHeader . puns[punNum] . "?"
+endfunction
+
+function OutputMessage(message)
+  normal! o
+  stopinsert
+  let @z = a:message
+  normal! "zpG
+  stopinsert
 endfunction
