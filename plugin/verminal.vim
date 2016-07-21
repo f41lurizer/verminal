@@ -1,5 +1,5 @@
 "function to initialize settings for the verminal
-function InitMappings()
+function! InitMappings()
   "declare variable local to buffer
   let b:commandNum = 1
   inoremap <buffer> <Enter> <Esc>:call RunCommand()<Enter>
@@ -13,18 +13,18 @@ endfunction
 
 "remove keybindings set by buffer
 "removing signs here would remove prompts, no need to do that
-function RemoveMappings()
+function! RemoveMappings()
   inoremap <buffer> <Enter> <Enter>
 endfunction
 
 "open a new buffer and initialize mappings in it
-function NewBuffer()
+function! NewBuffer()
   enew
   call InitMappings()
 endfunction
 
 "function to evaluate user commands
-function RunCommand()
+function! RunCommand()
   "yank command into register z
   normal! ^v$"zy
   let cmd = @z
@@ -67,7 +67,7 @@ function RunCommand()
   startinsert
 endfunction
 
-function OpenFile(path)
+function! OpenFile(path)
   execute "edit " . a:path
   let bufferNum = bufnr('%')
   b#
@@ -81,7 +81,7 @@ function OpenFile(path)
   "execute messageCmd
 endfunction
 
-function RunExCommand(cmd)
+function! RunExCommand(cmd)
   redir @z
   execute "silent " . a:cmd
   redir END
@@ -96,14 +96,14 @@ function RunExCommand(cmd)
   endfor
 endfunction
 
-function RemoveCommand(input, start) "function to remove command from string
+function! RemoveCommand(input, start) "function to remove command from string
   execute 'let value = a:input[' . a:start . ':' . len(a:input) . ']'
   return value
 endfunction
 
 "function to use signcolumn to display a prompt for user on command lines
 ":help sign-commands
-function ShowPrompt()
+function! ShowPrompt()
   let promptString = "> "
   let promptCmd = "sign define prompt text=" . promptString
   execute promptCmd
@@ -119,7 +119,7 @@ function ShowPrompt()
   startinsert
 endfunction
 
-function OutputEmacsMessage()
+function! OutputEmacsMessage()
   let time = reltime()[0]
   let punNum = time % 30 "30 puns
   let puns =  [
@@ -161,7 +161,7 @@ function OutputEmacsMessage()
     return punHeader . puns[punNum] . "?"
 endfunction
 
-function OutputMessage(message)
+function! OutputMessage(message)
   normal! o
   stopinsert
   let @z = a:message
